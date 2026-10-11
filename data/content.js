@@ -39,9 +39,9 @@ const p = (dir, title, cat, brief, count, reel = false) => {
     reel,
     cover: `${base}/cover.jpg`,
     videos: Array.from({ length: count }, (_, i) => `${base}/${i + 1}.mp4`),
+    posters: Array.from({ length: count }, (_, i) => `${base}/${i + 1}.jpg`),
   };
 };
-
 export const projects = [
   p(
     "3d-Animation",

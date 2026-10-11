@@ -1,8 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
-
 const SRC = "/work/showreel/1.mp4";
-const COVER = "/work/showreel/cover.jpg";
+const COVER = "/work/showreel/1.jpg";
 const fmt = (s) => {
   if (!Number.isFinite(s)) return "00:00";
   const m = Math.floor(s / 60);
@@ -33,7 +32,7 @@ export default function ShowReel() {
   const [cur, setCur] = useState(0);
   const [dur, setDur] = useState(0);
   const [muted, setMuted] = useState(false);
-
+  const [started, setStarted] = useState(false);
   const toggle = () => {
     const v = vid.current;
     if (!v) return;
@@ -69,16 +68,28 @@ export default function ShowReel() {
           <video
             ref={vid}
             src={SRC}
-            poster={COVER}
             playsInline
-            preload="metadata"
+            preload="none"
             onClick={toggle}
-            onPlay={() => setPlaying(true)}
+            onPlay={() => {
+              setPlaying(true);
+              setStarted(true);
+            }}
             onPause={() => setPlaying(false)}
             onTimeUpdate={(e) => setCur(e.currentTarget.currentTime)}
             onLoadedMetadata={(e) => setDur(e.currentTarget.duration)}
             className="h-full w-full cursor-pointer object-cover"
           />
+          {!started && (
+            <Image
+              src={COVER}
+              alt="WAHM showreel cover"
+              fill
+              priority
+              sizes="(min-width:1024px) 1024px, 100vw"
+              className="pointer-events-none object-cover"
+            />
+          )}
           <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
 
           <span className="pointer-events-none absolute right-4 top-4 h-2 w-2 rounded-full bg-green-400" />
