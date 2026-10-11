@@ -1,0 +1,35 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{@apply bg-bg font-sans text-white antialiased}
+@layer components{
+ .eyebrow{@apply text-[11px] font-bold uppercase tracking-[.2em] text-cyan}
+ .h2{@apply mt-3 text-3xl font-bold uppercase tracking-tight md:text-5xl}
+ .sub{@apply mt-3 max-w-xl text-sm text-mute md:text-base}
+ .card{@apply rounded-2xl border border-line bg-panel}
+ .btn{@apply inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-bold transition duration-300 hover:-translate-y-0.5 md:w-auto}
+ .btn-p{@apply btn text-white shadow-[0_12px_32px_-10px_rgba(91,59,240,.9)];background-image:linear-gradient(90deg,#5b3bf0,#4a90ff)}
+ .btn-o{@apply btn border border-line bg-[#14122a] hover:border-violet/60}
+ .chip{@apply shrink-0 whitespace-nowrap rounded-lg border border-line bg-transparent px-4 py-2 text-xs font-semibold text-mute transition hover:text-white}
+ .chip[aria-selected=true]{@apply border-transparent text-white shadow-[0_0_18px_rgba(91,59,240,.6)];background:#5b3bf0}
+ .tag{@apply rounded-md bg-cyan px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-bg}
+}
+.grad-text{background:linear-gradient(90deg,#a78bfa,#5ad1f5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.noscroll::-webkit-scrollbar{display:none}.noscroll{scrollbar-width:none}
+.brackets::before,.brackets::after{content:"";position:absolute;width:12px;height:12px;pointer-events:none;border-color:#4fd8f2aa}
+.brackets::before{top:8px;right:8px;border-top:1px solid;border-right:1px solid}
+.brackets::after{bottom:8px;left:8px;border-bottom:1px solid;border-left:1px solid}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pulseGlow{50%{filter:drop-shadow(0 0 26px rgba(120,90,255,.95)) drop-shadow(0 0 60px rgba(80,160,255,.5))}}
+@keyframes floaty{50%{transform:translateY(-8px)}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(91,59,240,.6)}100%{box-shadow:0 0 0 16px transparent}}
+@keyframes blink{50%{opacity:.35}}
+@keyframes sheet{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.fade-up{opacity:0;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) forwards}
+.d1{animation-delay:.12s}.d2{animation-delay:.24s}.d3{animation-delay:.36s}.d4{animation-delay:.5s}
+.logo-glow{animation:pulseGlow 4s ease-in-out infinite,floaty 6s ease-in-out infinite}
+.ping{animation:ping 1.8s infinite}.blink{animation:blink 1.6s infinite}
+.sweep::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);animation:sweep 3.2s infinite}
+dialog[open]{animation:sheet .35s ease-out}
+@supports (animation-timeline:view()){.reveal{animation:fadeUp linear both;animation-timeline:view();animation-range:entry 0% cover 25%}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important}}
