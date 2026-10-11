@@ -1,5 +1,5 @@
 import Heading from "@/components/ui/Heading";
-
+import Image from "next/image";
 const CLIENTS = [
   {
     name: "Seif Sayko",
@@ -36,7 +36,7 @@ const CLIENTS = [
     platform: "TikTok",
     url: "https://www.tiktok.com/@m.ghandour1?lang=ar",
   },
-];
+].map((c, i) => ({ ...c, avatar: `/brands/${i + 1}.jpeg` }));
 
 function initials(name) {
   return name
@@ -58,13 +58,14 @@ function ClientCard({ client }) {
     >
       {client.avatar ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={client.avatar}
           alt={client.name}
           width={44}
           height={44}
           loading="lazy"
-          className="h-11 w-11 rounded-full object-cover grayscale transition duration-300 group-hover:grayscale-0"
+          unoptimized
+          className="h-11 w-11 rounded-full object-cover transition duration-300"
         />
       ) : (
         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 text-sm font-bold text-white/80 transition group-hover:text-white">

@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 const SRC = "/work/showreel/1.mp4";
 const COVER = "/work/showreel/1.jpg";
+import Image from "next/image";
 const fmt = (s) => {
   if (!Number.isFinite(s)) return "00:00";
   const m = Math.floor(s / 60);
@@ -31,13 +32,16 @@ export default function ShowReel() {
   const [playing, setPlaying] = useState(false);
   const [cur, setCur] = useState(0);
   const [dur, setDur] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [muted, setMuted] = useState(false);
   const [started, setStarted] = useState(false);
   const toggle = () => {
     const v = vid.current;
     if (!v) return;
-    if (v.paused) v.play();
-    else v.pause();
+    if (v.paused) {
+      setLoading(true);
+      v.play()?.catch(() => setLoading(false));
+    } else v.pause();
   };
   const seek = (e) => {
     const v = vid.current;
@@ -75,9 +79,19 @@ export default function ShowReel() {
               setPlaying(true);
               setStarted(true);
             }}
-            onPause={() => setPlaying(false)}
             onTimeUpdate={(e) => setCur(e.currentTarget.currentTime)}
             onLoadedMetadata={(e) => setDur(e.currentTarget.duration)}
+            onWaiting={() => setLoading(true)}
+            onPlaying={() => {
+              setLoading(false);
+              setPlaying(true);
+              setStarted(true);
+            }}
+            onPause={() => {
+              setLoading(false);
+              setPlaying(false);
+            }}
+            onError={() => setLoading(false)}
             className="h-full w-full cursor-pointer object-cover"
           />
           {!started && (
@@ -93,7 +107,15 @@ export default function ShowReel() {
           <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
 
           <span className="pointer-events-none absolute right-4 top-4 h-2 w-2 rounded-full bg-green-400" />
-
+          {loading && (
+            <span
+              role="status"
+              aria-label="Loading showreel"
+              className="pointer-events-none absolute inset-0 z-10 grid place-items-center bg-black/40"
+            >
+              <span className="h-12 w-12 animate-spin rounded-full border-4 border-white/25 border-t-violet" />
+            </span>
+          )}
           {!playing && (
             <button
               type="button"

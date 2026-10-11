@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Icon from "@/components/ui/Icon";
+import VideoCard from "@/components/ui/VideoCard";
 export default function WorkModal({ p, onClose }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -47,21 +48,12 @@ export default function WorkModal({ p, onClose }) {
           <p className="mt-3 leading-relaxed text-white/75">{p.brief}</p>
           <div className="mt-6 grid gap-5">
             {p.videos.map((src, i) => (
-              <div
+              <VideoCard
                 key={src}
-                className={`relative overflow-hidden rounded-2xl border border-line bg-black ${p.reel ? "mx-auto aspect-[9/16] w-full max-w-[280px]" : "aspect-video"}`}
-              >
-                <video
-                  src={src}
-                  poster={p.posters[i]}
-                  controls
-                  playsInline
-                  preload="none"
-                  onPlay={onPlay}
-                  aria-label={`${p.title} – video ${i + 1}`}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+                src={src}
+                poster={p.posters[i]}
+                label={`${p.title} – video ${i + 1}`}
+              />
             ))}
           </div>
           <a href="#contact" onClick={close} className="btn-p mt-8 w-full">

@@ -3,16 +3,14 @@ import Image from "next/image";
 import {
   FaWhatsapp,
   FaInstagram,
-  FaBehance,
-  FaVimeoV,
-  FaEnvelope,
+  FaTiktok,
+  FaArtstation,
 } from "react-icons/fa6";
 
 const soc = [
-  { label: "Instagram", href: site.instagram, Icon: FaInstagram, ext: true },
-  { label: "Behance", href: site.behance, Icon: FaBehance, ext: true },
-  { label: "Vimeo", href: site.vimeo, Icon: FaVimeoV, ext: true },
-  { label: "Email", href: `mailto:${site.email}`, Icon: FaEnvelope, ext: false },
+  { label: "Instagram", href: site.instagram, Icon: FaInstagram },
+  { label: "TikTok", href: site.tiktok, Icon: FaTiktok },
+  { label: "ArtStation", href: site.artstation, Icon: FaArtstation },
 ];
 
 export default function Contact() {
@@ -39,27 +37,27 @@ export default function Contact() {
         </p>
 
         {/* Main CTA */}
+
         <a
           href={wa("Hi WAHM, I’d like to discuss a project.")}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-violet px-8 py-4 text-sm font-bold tracking-wide text-white shadow-[0_0_40px_-8px] shadow-violet transition duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:w-auto"
+          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-violet px-4 py-3.5 text-center text-xs font-bold tracking-wide text-white shadow-[0_0_40px_-8px] shadow-violet transition duration-300 hover:-translate-y-0.5 hover:brightness-110 xs:text-sm sm:mt-8 sm:w-auto sm:gap-3 sm:px-8 sm:py-4 sm:text-sm"
         >
-          <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
-          Start the conversation on WhatsApp
+          <FaWhatsapp className="h-5 w-5 shrink-0" aria-hidden="true" />
+          <span>Start the conversation on WhatsApp</span>
         </a>
 
         {/* Social icons */}
         <ul className="mt-7 flex items-center justify-center gap-3">
-          {soc.map(({ label, href, Icon, ext }) => (
+          {soc.map(({ label, href, Icon }) => (
             <li key={label}>
               <a
                 href={href}
                 aria-label={label}
                 title={label}
-                {...(ext
-                  ? { target: "_blank", rel: "noopener noreferrer me" }
-                  : {})}
+                target="_blank"
+                rel="noopener noreferrer me"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white/70 transition duration-300 hover:-translate-y-0.5 hover:border-violet hover:text-white"
               >
                 <Icon className="h-4 w-4" aria-hidden="true" />
