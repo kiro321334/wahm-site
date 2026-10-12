@@ -55,7 +55,7 @@ export const projects = [
     "Animation",
     "Animation",
     "Character and object animation with polished timing and motion.",
-    12,
+    11,
   ),
   p(
     "blender",
@@ -69,14 +69,14 @@ export const projects = [
     "Intros",
     "Intro",
     "Short, punchy intros and logo reveals built for channels and brands.",
-    11,
+    8,
   ),
   p(
     "Motion-graphic",
     "Motion Graphics",
     "Motion Graphics",
     "Clean animated typography, vector geometry and kinetic graphic systems.",
-    15,
+    14,
   ),
   p(
     "Promo - Ads",
